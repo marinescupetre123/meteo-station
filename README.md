@@ -7,3 +7,5 @@ Componente: -microcotrollerul
             -ecran LCD
             -cablaje( jumperi)
             -potentiometru(pentru reglarea intensitatii luminoase a LCD-ului)
+
+@Petre Marinescu
