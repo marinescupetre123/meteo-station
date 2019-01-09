@@ -1,0 +1,52 @@
+int main(void)
+{
+  char data[5];
+  LiquidCrystal lcd(12,10, 11, 5, 4, 3, 2);
+   lcd.begin(16, 2);
+   lcd.clear();
+   lcd.setCursor(0, 0);
+   lcd.print("Humidity =");
+   lcd.setCursor(0, 1);
+   lcd.print("Temp = ");
+   
+  _delay_ms(100);
+  
+  while (1)
+  {
+    
+    Request();    /* send start pulse */
+    Response();   /* receive response */
+    I_RH = Receive_data(); /* store first eight bit in I_RH */
+    D_RH = Receive_data(); /* store next eight bit in D_RH */
+    I_Temp = Receive_data(); /* store next eight bit in I_Temp */
+    D_Temp = Receive_data(); /* store next eight bit in D_Temp */
+    CheckSum = Receive_data(); /* store next eight bit in CheckSum */
+  
+   lcd.clear();
+   lcd.setCursor(0, 0);
+   lcd.print("Humidity =");
+   lcd.setCursor(0, 1);
+   lcd.print("Temp = ");
+     
+      itoa(I_RH, data, 10);
+      lcd.setCursor(11, 0);
+      lcd.print(data);
+      lcd.print(".");
+
+      itoa(D_RH, data, 10);
+      lcd.print(data);
+      lcd.print("%");
+
+      itoa(I_Temp, data, 10);
+      lcd.setCursor(7, 1);
+      lcd.print(data);
+      lcd.print(".");
+
+      itoa(D_Temp, data, 10);
+      lcd.print(data);
+      lcd.print(" C   ");
+
+
+    _delay_ms(1000);
+  }
+}
